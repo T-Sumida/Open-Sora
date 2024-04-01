@@ -48,11 +48,11 @@ def install_dependencies():
         )
 
     # install apex
-    # if not _is_package_available("apex"):
-    #     subprocess.run(
-    #         f'{sys.executable} -m pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" git+https://github.com/NVIDIA/apex.git',
-    #         shell=True,
-    #     )
+    if not _is_package_available("apex"):
+        subprocess.run(
+            f'{sys.executable} -m pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" git+https://github.com/NVIDIA/apex.git',
+            shell=True,
+        )
 
     # install ninja
     if not _is_package_available("ninja"):
