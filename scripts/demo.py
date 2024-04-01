@@ -175,6 +175,7 @@ def main():
     # read config
     args = parse_args()
     config = read_config(CONFIG_MAP[args.model_type])
+    print(config)
 
     # set up
     set_up_torch()
