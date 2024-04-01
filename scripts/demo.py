@@ -16,16 +16,14 @@ from functools import partial
 import gradio as gr
 import torch
 
-MODEL_TYPES = ["v1-16x256x256", "v1-HQ-16x256x256", "v1-HQ-16x512x512"]
+MODEL_TYPES = ["v1-16x256x256", "v1-HQ-16x256x256"]
 CONFIG_MAP = {
     "v1-16x256x256": "configs/opensora/inference/16x256x256.py",
     "v1-HQ-16x256x256": "configs/opensora/inference/16x256x256.py",
-    "v1-HQ-16x512x512": "configs/opensora/inference/16x512x512.py",
 }
 HF_STDIT_MAP = {
     "v1-16x256x256": "hpcai-tech/OpenSora-STDiT-v1-16x256x256",
     "v1-HQ-16x256x256": "hpcai-tech/OpenSora-STDiT-v1-HQ-16x256x256",
-    "v1-HQ-16x512x512": "hpcai-tech/OpenSora-STDiT-v1-HQ-16x512x512",
 }
 
 
@@ -50,11 +48,11 @@ def install_dependencies():
         )
 
     # install apex
-    if not _is_package_available("apex"):
-        subprocess.run(
-            f'{sys.executable} -m pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" git+https://github.com/NVIDIA/apex.git',
-            shell=True,
-        )
+    # if not _is_package_available("apex"):
+    #     subprocess.run(
+    #         f'{sys.executable} -m pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" git+https://github.com/NVIDIA/apex.git',
+    #         shell=True,
+    #     )
 
     # install ninja
     if not _is_package_available("ninja"):
@@ -162,7 +160,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--model-type",
-        default="v1-HQ-16x512x512",
+        default="v1-HQ-16x256x256",
         choices=MODEL_TYPES,
         help=f"The type of model to run for the Gradio App, can only be {MODEL_TYPES}",
     )
